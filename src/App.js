@@ -1,29 +1,40 @@
-import './App.css';
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './Home'
-import About from './About'
-import Contact from './Contact'
 import Error from './Error'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap'
+import Login from './components/devlogin/Login'
+import Student from './components/backend/Student'
+import Staff from './components/backend/Staff'
+import AppliedOd from './components/backend/api/AppliedOd'
+import NewOd from './components/backend/api/NewOd'
+import OdForms from './components/backend/api/OdForms'
+import Students from './components/backend/api/Students'
+import NewStudent from './components/backend/api/NewStudent'
+// import DeleteStudent from './components/backend/api/DeleteStudent'
+import UpdateStudent from './components/backend/api/UpdateStudent'
 
 function App() {
 
   return (
-    <div className="App">
       <BrowserRouter>
-        {/* <a href='/'>Home</a>&nbsp;&nbsp;
-        <a href='/about'>About</a>&nbsp;&nbsp;
-        <a href='/contact'>Contact</a> */}
-        <Link to={'/'}>Home</Link>&nbsp;&nbsp;
-        <Link to={'/about'}>About</Link>&nbsp;&nbsp;
-        <Link to={'/contact'}>Contact</Link>&nbsp;&nbsp;
         <Routes>
-          <Route path='/' element={<Home name='hi'/>} />
-          <Route path='/about' element={<About/>} />
-          <Route path='/contact' element={<Contact/>} />
-          <Route path='*' element={<Error/>}/>
+          <Route path='/' element={<Home/>} />
+          <Route path='/login' element={<Login/>} />
+          <Route path='/student' element={<Student/>} >
+            <Route path='applied/:regid' element={<AppliedOd/>}/>
+            <Route path='newod/:regid' element={<NewOd/>} />
+          </Route>
+          <Route path='/staff' element={<Staff/>}>
+            <Route path='odforms' element={<OdForms/>} />
+            <Route path='students' element={<Students/>} />
+            <Route path='newstudent' element={<NewStudent/>} />
+            {/* <Route path='deletestudent/:regid' element={<DeleteStudent/>} /> */}
+            <Route path='updatestudent/:regid' element={<UpdateStudent/>} />
+          </Route>
+          <Route path='*' element={<Error/>} />
         </Routes>
       </BrowserRouter>
-    </div>
   );
 }
 
