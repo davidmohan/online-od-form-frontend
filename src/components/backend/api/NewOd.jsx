@@ -1,5 +1,5 @@
+import { faAllergies } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -9,16 +9,13 @@ function NewOd() {
   const Height = {
     height: '650px'
   }
+
   const params = useParams()
 
   const navigate = useNavigate()
 
   const [oddata, setOdData] = useState({
-    regid: params.regid,
-    startD: '',
-    endD: '',
-    title: '',
-    description: ''
+    regid: params.regid
   }) 
 
   const HandleForm = (e) => {
@@ -28,41 +25,41 @@ function NewOd() {
   const [dates, setDates] = useState([])
 
   useEffect(() => {
-    axios.get(`http://localhost/odform/od/getdates.php?regid=${oddata.regid}`).then(res => setDates(res.data))
-  })
-  
-  const [insdate, setInsDate] = useState({
-    allow: false
+    axios.get(`http://localhost/odform/od/getdates.php?regid=${params.regid}`).then(res => setDates(res.data))
   })
 
   const SubmitOdForm = (e) => {
     e.preventDefault()
 
-    dates.map(date => {
-      if((oddata.startD != date.startD && oddata.endD != date.endD) || (oddata.startD == '' && date.endD == '') ) {
-        setInsDate({allow: true})
+    var allow = true
+
+    for(var i = 0; i < dates.length; i++) {
+      if(dates[i].startD != oddata.startD && dates[i].endD != oddata.endD) {
+        allow = true
       } else {
-        setInsDate({allow: false})
-        return
+        allow = false
+        break
       }
-    }) 
-    
-    if(insdate.allow) {
+    }
+
+    if(allow) {
       if(oddata.endD >= oddata.startD) {
         axios.post('http://localhost/odform/od/createod.php', oddata).then(res => {
           if(res.data.key) {
+            alert('Your Od Applied.')
             navigate(`/student/applied/${params.regid}`)
           } else {
-            alert("Not Applied!")
+            alert('Your Od Not Applied.')
           }
         })
-      }  else {
-        alert("Given Date range is not Posible to apply!")
+      } else {
+        alert('These Dates are not able to apply')
       }
-      setInsDate({allow: false})
     } else {
-      alert('These dates are already applied')
+      alert('Dear, ' + params.regid + '\nyou are already applied od for this date!. \nPlease check it out.')
+      navigate(`/student/applied/${params.regid}`)
     }
+
   }
 
   return (

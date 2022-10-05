@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function AppliedOd() {
 
@@ -13,7 +13,7 @@ function AppliedOd() {
   const [users, setUser] = useState([])
 
   useEffect(() => {
-    axios.get(`http://localhost/odform/od/odselectbyid.php?regid=${param.regid}`).then(res => {setUser(res.data)})
+    axios.get(`http://localhost/odform/od/odselectbyregid.php?regid=${param.regid}`).then(res => {setUser(res.data)})
   })
 
   return (
@@ -48,7 +48,8 @@ function AppliedOd() {
                         (user.status == "accept") ? (
                           <button className="btn btn-success w-100" disabled>Approved</button>
                         ) : (
-                          <button className="btn btn-danger w-100" disabled>Denied</button>
+                          // <button className="btn btn-danger w-100" disabled>Denied</button>
+                          <Link to={`/student/denied/${user.id}`} className='btn btn-danger w-100'>Denied</Link>
                         )
                       )}
                     </td>

@@ -38,7 +38,7 @@ function StaffLoginForm( {LoggedIn} ) {
   return (
     <div className="container w-100 d-flex flex-column justify-content-center align-items-center" style={Height}>
       <form onSubmit={SubmitForm} className='col-md-3'>
-        <h2 className='my-4'>SignIn</h2>
+        <h2 className='my-4'>Staff SignIn</h2>
         <div className='my-2'>
           <label htmlFor="regid">Regid :</label>
           <input type="text" className='form-control' name='regid' onChange={HandleChange} value={details.regid} required />

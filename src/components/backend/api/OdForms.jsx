@@ -56,14 +56,14 @@ function OdForms() {
                       {
                         <div>
                           {(user.status == "pending") ? (
-                        <Link className='btn btn-warning'>View</Link>
+                        <Link to={`/staff/verification/${user.id}`} className='btn btn-warning col-6'>View</Link>
                       ) : (
                         (user.status == "accept") ? (
-                          <Link className='btn btn-success'>Approved</Link>
+                          <Link to={`/staff/approvedod/${user.id}`} className='btn btn-success col-6'>Approved</Link>
                         ) : (
-                          <Link className='btn btn-danger '>Denied</Link>
+                          <Link to={`/staff/deniedod/${user.id}`} className='btn btn-danger col-6'>Denied</Link>
                         )
-                      )} <button className="btn btn-danger" onClick={() => DeleteOd(user.id) }>Delete</button>
+                      )} <button className="btn btn-secondary" onClick={() => DeleteOd(user.id) }><i class="fa-solid fa-trash"></i></button>
                         </div>
                       }
                     </td>

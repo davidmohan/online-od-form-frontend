@@ -41,7 +41,7 @@ function Students() {
       <div className="container my-3">
         <div className="container">
           <div className="py-4">
-            <h3 className="mb-3 text-center">Od Applications</h3>
+            <h3 className="mb-3 text-center">Students</h3>
             <table className="table">
               <thead className="thead-primary">
                 <tr>

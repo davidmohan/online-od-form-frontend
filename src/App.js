@@ -13,6 +13,10 @@ import Students from './components/backend/api/Students'
 import NewStudent from './components/backend/api/NewStudent'
 // import DeleteStudent from './components/backend/api/DeleteStudent'
 import UpdateStudent from './components/backend/api/UpdateStudent'
+import OdVerification from './components/backend/api/OdVerification'
+import ApprovedOd from './components/backend/api/ApprovedOd'
+import DeniedOd from './components/backend/api/DeniedOd'
+import Denied from './components/backend/api/Denied'
 
 function App() {
 
@@ -24,6 +28,7 @@ function App() {
           <Route path='/student' element={<Student/>} >
             <Route path='applied/:regid' element={<AppliedOd/>}/>
             <Route path='newod/:regid' element={<NewOd/>} />
+            <Route path='denied/:id' element={<Denied/>} />
           </Route>
           <Route path='/staff' element={<Staff/>}>
             <Route path='odforms' element={<OdForms/>} />
@@ -31,6 +36,9 @@ function App() {
             <Route path='newstudent' element={<NewStudent/>} />
             {/* <Route path='deletestudent/:regid' element={<DeleteStudent/>} /> */}
             <Route path='updatestudent/:regid' element={<UpdateStudent/>} />
+            <Route path='verification/:id' element={<OdVerification/>} />
+            <Route path='approvedod/:id' element={<ApprovedOd/>} />
+            <Route path='deniedod/:id' element={<DeniedOd/>} />
           </Route>
           <Route path='*' element={<Error/>} />
         </Routes>
